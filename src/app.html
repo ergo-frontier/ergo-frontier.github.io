@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="%lang%" dir="%dir%">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.ico" sizes="any" />
+		<link rel="icon" href="%sveltekit.assets%/favicon-32.png" type="image/png" sizes="32x32" />
+		<link rel="apple-touch-icon" href="%sveltekit.assets%/apple-touch-icon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#0d0a07" media="(prefers-color-scheme: dark)" />
+		<meta name="theme-color" content="#f4e9d2" media="(prefers-color-scheme: light)" />
+		<script>
+			// Apply the saved / preferred theme before first paint (no flash).
+			// Same logic as celaut-project.github.io: saved choice, else the
+			// OS preference, else dark (the Exchange's look).
+			(function () {
+				try {
+					var saved = localStorage.getItem('ergo-frontier-theme');
+					var t =
+						saved === 'light' || saved === 'dark'
+							? saved
+							: window.matchMedia &&
+								  window.matchMedia('(prefers-color-scheme: light)').matches
+								? 'light'
+								: 'dark';
+					document.documentElement.setAttribute('data-theme', t);
+				} catch (e) {
+					document.documentElement.setAttribute('data-theme', 'dark');
+				}
+			})();
+		</script>
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>
