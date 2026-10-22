@@ -1,9 +1,11 @@
 <!doctype html>
 <!--
-	Template for static/og-image.jpg (1200x630). Regenerate from the repo
-	root with any Playwright install:
+	Template for static/og-image.jpg and static/og-image-es.jpg (1200x630).
+	Regenerate from the repo root with any Playwright install:
 	  npx playwright screenshot --viewport-size "1200, 630" --wait-for-timeout 1500 \
 	    "file://$PWD/scripts/og-image.html" static/og-image.jpg
+	  npx playwright screenshot --viewport-size "1200, 630" --wait-for-timeout 1500 \
+	    "file://$PWD/scripts/og-image.html?lang=es" static/og-image-es.jpg
 -->
 <html lang="en">
 	<head>
@@ -74,8 +76,18 @@
 		<div class="poster"><img src="../src/lib/assets/ergo-frontier-avatar.png" alt="" /></div>
 		<div>
 			<p class="eyebrow">Ergo Frontier</p>
-			<h1>Cross the line.<br />Enter freedom.</h1>
-			<p class="lead">Trustless swaps between Web2 payments and Ergo, verified by a quorum of judges.</p>
+			<h1 id="title">Cross the line.<br />Enter freedom.</h1>
+			<p class="lead" id="lead">Trustless swaps between Web2 payments and Ergo, verified by a quorum of judges.</p>
 		</div>
+		<script>
+			// ?lang=es → Spanish card (the motto is the org README's original).
+			if (new URLSearchParams(location.search).get('lang') === 'es') {
+				document.documentElement.lang = 'es';
+				document.getElementById('title').innerHTML = 'Cruza la frontera.<br />Entra en la libertad.';
+				document.getElementById('title').style.fontSize = '84px';
+				document.getElementById('lead').textContent =
+					'Pagos Web2 que activan lógica en Ergo, verificados por un quórum de jueces.';
+			}
+		</script>
 	</body>
 </html>

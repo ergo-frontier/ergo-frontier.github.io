@@ -1,6 +1,6 @@
 /*
  * English copy. The source of truth for every user-facing string on the
- * site, and the fallback for any future locale.
+ * site, and the fallback for es.js (keep the same keys in both).
  *
  * Where the words come from (keep it that way: no invented metrics,
  * partners, dates or "launched" claims):
@@ -21,7 +21,12 @@ export default {
 	meta: {
 		title: 'Ergo Frontier: trustless swaps between Web2 payments and Ergo',
 		description:
-			'Ergo Frontier turns verifiable Web2 facts, like a Revolut payment, into spending conditions on Ergo. TLS proofs, checked by a quorum of judges with auditable on-chain reputation. Early stage, not on mainnet yet.'
+			'Ergo Frontier turns verifiable Web2 facts, like a Revolut payment, into spending conditions on Ergo. TLS proofs, checked by a quorum of judges with auditable on-chain reputation. Early stage, not on mainnet yet.',
+		ogImageAlt: 'Ergo Frontier logo next to the motto: Cross the line. Enter freedom.'
+	},
+
+	lang: {
+		switchTo: 'Ver esta página en español'
 	},
 
 	theme: {
@@ -44,7 +49,7 @@ export default {
 	},
 
 	hero: {
-		logoAlt: 'Ergo Frontier logo: a bison on a mesa under a setting sun, next to a cactus',
+		logoAlt: 'Ergo Frontier logo: a bison under a setting sun, next to a cactus and a mountain, above the ERGO-FRONTIER wordmark',
 		eyebrow: 'Trustless swaps on Ergo',
 		title: 'Cross the line. Enter freedom.',
 		lead: 'Ergo Frontier turns verifiable Web2 facts, like a <strong>Revolut payment</strong>, into spending conditions on <strong>Ergo</strong>. A quorum of independent judges checks a TLS proof of what happened, and the contract releases the funds. No custodian, no central authority.',

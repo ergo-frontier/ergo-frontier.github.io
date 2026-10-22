@@ -1,13 +1,14 @@
 <script>
 	/*
 	 * Sticky top bar: logo + wordmark (the Exchange's "ERGO FRONTIER" in
-	 * Bebas Neue), in-page section links, GitHub, theme toggle. The
+	 * Bebas Neue), in-page section links, GitHub, language and theme. The
 	 * section links collapse on narrow screens; everything they point to
 	 * is one scroll away anyway.
 	 */
 	import { onMount } from 'svelte';
 	import { base } from '$app/paths';
-	import { t } from '$lib/i18n/index.js';
+	import { locale, t, withLocale } from '$lib/i18n/index.js';
+	import LanguageToggle from './LanguageToggle.svelte';
 	import ThemeToggle from './ThemeToggle.svelte';
 
 	let scrolled = false;
@@ -24,7 +25,7 @@
 
 <header class="topbar" class:scrolled>
 	<div class="inner">
-		<a class="brand" href="{base}/" aria-label={$t('nav.home')}>
+		<a class="brand" href="{base}{withLocale('/', $locale)}" aria-label={$t('nav.home')}>
 			<img src="{base}/logo-128.png" alt="" width="36" height="36" />
 			<span class="wordmark" aria-hidden="true">Ergo Frontier</span>
 		</a>
@@ -50,6 +51,7 @@
 					/>
 				</svg>
 			</a>
+			<LanguageToggle />
 			<ThemeToggle />
 		</div>
 	</div>
@@ -212,9 +214,30 @@
 		}
 	}
 
+	/* Phones: keep logo + GitHub/language/theme on one row, and fit the
+	   (longer) Spanish section links without scrolling at 390px. */
+	@media (max-width: 480px) {
+		.inner {
+			column-gap: 12px;
+		}
+
+		.actions {
+			gap: 6px;
+		}
+
+		.wordmark {
+			font-size: 1.35rem;
+		}
+
+		nav a {
+			padding: 6px 4px;
+			font-size: 0.82rem;
+		}
+	}
+
 	@media (max-width: 380px) {
 		.wordmark {
-			font-size: 1.3rem;
+			font-size: 1.2rem;
 		}
 	}
 </style>
