@@ -1,0 +1,93 @@
+<!doctype html>
+<!--
+	Template for static/og-image.jpg and static/og-image-es.jpg (1200x630).
+	Regenerate from the repo root with any Playwright install:
+	  npx playwright screenshot --viewport-size "1200, 630" --wait-for-timeout 1500 \
+	    "file://$PWD/scripts/og-image.html" static/og-image.jpg
+	  npx playwright screenshot --viewport-size "1200, 630" --wait-for-timeout 1500 \
+	    "file://$PWD/scripts/og-image.html?lang=es" static/og-image-es.jpg
+-->
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600&family=JetBrains+Mono:wght@500&display=block"
+			rel="stylesheet"
+		/>
+		<style>
+			html,
+			body {
+				margin: 0;
+				width: 1200px;
+				height: 630px;
+				overflow: hidden;
+			}
+			body {
+				background:
+					radial-gradient(ellipse 900px 520px at 75% 115%, rgba(212, 160, 82, 0.3), transparent 70%),
+					radial-gradient(ellipse 700px 420px at 5% 100%, rgba(184, 115, 51, 0.16), transparent 65%),
+					#0d0a07;
+				color: #faf5ef;
+				font-family: Inter, sans-serif;
+				display: flex;
+				align-items: center;
+				gap: 64px;
+				padding: 0 80px;
+				box-sizing: border-box;
+			}
+			.poster {
+				flex: none;
+				width: 360px;
+				padding: 10px;
+				border-radius: 20px;
+				background: linear-gradient(135deg, #d4a052, #b87333);
+				transform: rotate(2deg);
+				box-shadow: 0 0 60px rgba(212, 160, 82, 0.35);
+			}
+			.poster img {
+				display: block;
+				width: 100%;
+				border-radius: 12px;
+			}
+			.eyebrow {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 22px;
+				letter-spacing: 0.16em;
+				text-transform: uppercase;
+				color: #e4b062;
+				margin: 0 0 18px;
+			}
+			h1 {
+				font-family: 'Bebas Neue', sans-serif;
+				font-weight: 400;
+				font-size: 108px;
+				line-height: 0.92;
+				margin: 0 0 26px;
+			}
+			p.lead {
+				font-size: 27px;
+				line-height: 1.45;
+				color: #c9bcae;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="poster"><img src="../src/lib/assets/ergo-frontier-avatar.png" alt="" /></div>
+		<div>
+			<p class="eyebrow">Ergo Frontier</p>
+			<h1 id="title">Cross the line.<br />Enter freedom.</h1>
+			<p class="lead" id="lead">Trustless swaps between Web2 payments and Ergo, verified by a quorum of judges.</p>
+		</div>
+		<script>
+			// ?lang=es → Spanish card (the motto is the org README's original).
+			if (new URLSearchParams(location.search).get('lang') === 'es') {
+				document.documentElement.lang = 'es';
+				document.getElementById('title').innerHTML = 'Cruza la frontera.<br />Entra en la libertad.';
+				document.getElementById('title').style.fontSize = '84px';
+				document.getElementById('lead').textContent =
+					'Pagos Web2 que activan lógica en Ergo, verificados por un quórum de jueces.';
+			}
+		</script>
+	</body>
+</html>

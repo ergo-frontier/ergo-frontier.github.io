@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="%lang%" dir="%dir%">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.ico" sizes="any" />
+		<link rel="icon" href="%sveltekit.assets%/favicon-32.png" type="image/png" sizes="32x32" />
+		<link rel="apple-touch-icon" href="%sveltekit.assets%/apple-touch-icon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#0d0a07" media="(prefers-color-scheme: dark)" />
+		<meta name="theme-color" content="#f4e9d2" media="(prefers-color-scheme: light)" />
+		<script>
+			// hooks.server.js fills in %lang% from the URL: right from byte
+			// one for /es, and "en" for the unprefixed route. Same as Celaut:
+			// on the UNPREFIXED route only, apply a saved/preferred language
+			// before first paint. A prefixed route is left alone; its URL wins.
+			(function () {
+				try {
+					var supported = ['en', 'es'];
+					var seg = location.pathname.split('/')[1];
+					if (supported.indexOf(seg) !== -1) return;
+					var saved = localStorage.getItem('ergo-frontier-lang');
+					if (supported.indexOf(saved) !== -1) {
+						document.documentElement.setAttribute('lang', saved);
+						return;
+					}
+					var tags = [navigator.language].concat(navigator.languages || []);
+					for (var i = 0; i < tags.length; i++) {
+						var base = String(tags[i] || '').toLowerCase().split('-')[0];
+						if (supported.indexOf(base) !== -1) {
+							document.documentElement.setAttribute('lang', base);
+							return;
+						}
+					}
+				} catch (e) {
+					/* keep the server-resolved lang */
+				}
+			})();
+			// Apply the saved / preferred theme before first paint (no flash).
+			// Same logic as celaut-project.github.io: saved choice, else the
+			// OS preference, else dark (the Exchange's look).
+			(function () {
+				try {
+					var saved = localStorage.getItem('ergo-frontier-theme');
+					var t =
+						saved === 'light' || saved === 'dark'
+							? saved
+							: window.matchMedia &&
+								  window.matchMedia('(prefers-color-scheme: light)').matches
+								? 'light'
+								: 'dark';
+					document.documentElement.setAttribute('data-theme', t);
+				} catch (e) {
+					document.documentElement.setAttribute('data-theme', 'dark');
+				}
+			})();
+		</script>
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>
